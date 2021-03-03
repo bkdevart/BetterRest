@@ -16,6 +16,8 @@ struct ContentView: View {
     @State private var alertMessage = ""
     @State private var showingAlert = false
     
+    let model = SleepCalculator()
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -59,8 +61,6 @@ struct ContentView: View {
     }
     
     func calculateBedtime() {
-        let model = SleepCalculator()
-        
         let components = Calendar.current.dateComponents([.hour, .minute], from: wakeUp)
         let hour = (components.hour ?? 0) * 60 * 60
         let minute = (components.minute ?? 0) * 60
