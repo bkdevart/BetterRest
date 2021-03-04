@@ -42,18 +42,23 @@ struct ContentView: View {
                     }
                 }
                 
-//                Replace the “Number of cups” stepper with a Picker showing the same range of values.
                 Section {
                     Text("Daily coffee intake")
                         .font(.headline)
                     
-                    Stepper(value: $coffeeAmount, in: 1...20) {
-                        if coffeeAmount == 1 {
-                            Text("1 cup")
-                        } else {
-                            Text("\(coffeeAmount) cups")
+                    Picker("Coffee", selection: $coffeeAmount) {
+                        ForEach(1..<21) { cup in
+                            Text("\(cup) cups")
                         }
                     }
+                    
+//                    Stepper(value: $coffeeAmount, in: 1...20) {
+//                        if coffeeAmount == 1 {
+//                            Text("1 cup")
+//                        } else {
+//                            Text("\(coffeeAmount) cups")
+//                        }
+//                    }
                 }
             }
             .navigationBarTitle("BetterRest")
