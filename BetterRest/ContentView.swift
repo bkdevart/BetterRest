@@ -21,10 +21,11 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             Form {
-                VStack(alignment: .leading, spacing: 0) {
+//                Replace each VStack in our form with a Section, where the text view is the title of the section. Do you prefer this layout or the VStack layout? It’s your app – you choose!
+                
+                Section {
                     Text("When do you want to wake up?")
                         .font(.headline)
-                    
                     DatePicker("Please enter a time",
                                selection: $wakeUp,
                                displayedComponents: .hourAndMinute)
@@ -32,7 +33,7 @@ struct ContentView: View {
                         .datePickerStyle(WheelDatePickerStyle())
                 }
                 
-                VStack(alignment: .leading, spacing: 0) {
+                Section {
                     Text("Desired amount of sleep")
                         .font(.headline)
                     
@@ -41,7 +42,8 @@ struct ContentView: View {
                     }
                 }
                 
-                VStack(alignment: .leading, spacing: 0) {
+//                Replace the “Number of cups” stepper with a Picker showing the same range of values.
+                Section {
                     Text("Daily coffee intake")
                         .font(.headline)
                     
