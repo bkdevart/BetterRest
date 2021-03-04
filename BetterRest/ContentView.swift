@@ -21,7 +21,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             Form {
-                Text("Wake Up Time: \(alertMessage)")
+                Text("Sleep Time: \(alertMessage)")
                     .font(.headline)
                 
                 Section {
@@ -46,9 +46,9 @@ struct ContentView: View {
                 }
                 
                 Section {
-                    Text("Daily coffee intake")
-                        .font(.headline)
-                    
+//                    Text("Daily coffee intake")
+//                        .font(.headline)
+//
 //                    Picker("Coffee", selection: $coffeeAmount) {
 //                        ForEach(1..<21) { cup in
 //                            Text("\(cup) cups")
