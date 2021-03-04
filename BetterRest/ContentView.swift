@@ -21,7 +21,8 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             Form {
-//                Replace each VStack in our form with a Section, where the text view is the title of the section. Do you prefer this layout or the VStack layout? It’s your app – you choose!
+                Text("Wake Up Time: \(alertMessage)")
+                    .font(.headline)
                 
                 Section {
                     Text("When do you want to wake up?")
@@ -31,6 +32,7 @@ struct ContentView: View {
                                displayedComponents: .hourAndMinute)
                         .labelsHidden()
                         .datePickerStyle(WheelDatePickerStyle())
+                        .onChange(of: wakeUp) { newValue in calculateBedtime() }
                 }
                 
                 Section {
@@ -40,37 +42,31 @@ struct ContentView: View {
                     Stepper(value: $sleepAmount, in: 4...12, step: 0.25) {
                         Text("\(sleepAmount, specifier: "%g") hours")
                     }
+                    .onChange(of: sleepAmount) { newValue in calculateBedtime() }
                 }
                 
                 Section {
                     Text("Daily coffee intake")
                         .font(.headline)
                     
-                    Picker("Coffee", selection: $coffeeAmount) {
-                        ForEach(1..<21) { cup in
-                            Text("\(cup) cups")
-                        }
-                    }
-                    
-//                    Stepper(value: $coffeeAmount, in: 1...20) {
-//                        if coffeeAmount == 1 {
-//                            Text("1 cup")
-//                        } else {
-//                            Text("\(coffeeAmount) cups")
+//                    Picker("Coffee", selection: $coffeeAmount) {
+//                        ForEach(1..<21) { cup in
+//                            Text("\(cup) cups")
 //                        }
 //                    }
+//                    .onChange(of: coffeeAmount) { newValue in calculateBedtime() }
+                    
+                    Stepper(value: $coffeeAmount, in: 1...20) {
+                        if coffeeAmount == 1 {
+                            Text("1 cup")
+                        } else {
+                            Text("\(coffeeAmount) cups")
+                        }
+                    }
+                    .onChange(of: coffeeAmount) { newValue in calculateBedtime() }
                 }
             }
             .navigationBarTitle("BetterRest")
-            .navigationBarItems(trailing: Button(action: calculateBedtime) {
-                Text("Calculate")
-                }
-            )
-            .alert(isPresented: $showingAlert) {
-                Alert(title: Text(alertTitle),
-                      message: Text(alertMessage),
-                      dismissButton: .default(Text("OK")))
-            }
         }
     }
     
@@ -100,9 +96,10 @@ struct ContentView: View {
         } catch {
             alertTitle = "Error"
             alertMessage = "Sorry, there was  a problem calculating your bedtime."
+            
         }
-        
         showingAlert = true
+//        return alertMessage
     }
 }
 
