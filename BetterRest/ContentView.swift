@@ -24,9 +24,9 @@ struct ContentView: View {
                 Text("Sleep Time: \(alertMessage)")
                     .font(.headline)
                 
-                Section {
-                    Text("When do you want to wake up?")
-                        .font(.headline)
+                Section (header: Text("When do you want to wake up?")
+                            .font(.headline)) {
+
                     DatePicker("Please enter a time",
                                selection: $wakeUp,
                                displayedComponents: .hourAndMinute)
@@ -35,9 +35,8 @@ struct ContentView: View {
                         .onChange(of: wakeUp) { newValue in calculateBedtime() }
                 }
                 
-                Section {
-                    Text("Desired amount of sleep")
-                        .font(.headline)
+                Section(header: Text("Desired amount of sleep")
+                            .font(.headline)) {
                     
                     Stepper(value: $sleepAmount, in: 4...12, step: 0.25) {
                         Text("\(sleepAmount, specifier: "%g") hours")
@@ -45,10 +44,9 @@ struct ContentView: View {
                     .onChange(of: sleepAmount) { newValue in calculateBedtime() }
                 }
                 
-                Section {
-//                    Text("Daily coffee intake")
-//                        .font(.headline)
-//
+                Section(header: Text("Daily coffee intake")
+                            .font(.headline)) {
+                    
 //                    Picker("Coffee", selection: $coffeeAmount) {
 //                        ForEach(1..<21) { cup in
 //                            Text("\(cup) cups")
