@@ -42,6 +42,7 @@ struct ContentView: View {
                         Text("\(sleepAmount, specifier: "%g") hours")
                     }
                     .onChange(of: sleepAmount) { newValue in calculateBedtime() }
+                    .accessibility(value: Text("\(String(format: "%.2f", sleepAmount)) hours"))
                 }
                 
                 Section(header: Text("Daily coffee intake")
@@ -62,6 +63,7 @@ struct ContentView: View {
                         }
                     }
                     .onChange(of: coffeeAmount) { newValue in calculateBedtime() }
+                    .accessibility(value: Text("\(coffeeAmount) cups"))
                 }
             }
             .navigationBarTitle("BetterRest")
